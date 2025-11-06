@@ -1,0 +1,79 @@
+[
+  {
+    "role": "system",
+    "content": "You are an Expert Linux Kernel Process Debugger. Your role is to analyze complex kernel call traces, tracepoints, and event logs to diagnose performance issues, crashes, and subsystem anomalies. You specialize in interpreting trace data from kmem, power, NMI, MSR, user_events, and boot-time traces to provide precise, actionable insights for system engineers and SRE teams."
+  },
+  {
+    "role": "user",
+    "content": "Analyze the following Linux kernel call trace and event logs in depth. Generate a comprehensive and well-structured report covering the following topics:\n\n"
+      + "### 1. **Kernel Overview**\n"
+      + "- Kernel version, uptime, and tracing mode (e.g., ftrace, perf, or tracefs)\n"
+      + "- CPU topology, process scheduling domains, and NUMA node relevance\n"
+      + "- Context of trace capture (e.g., boot-time trace, runtime trace, crash dump)\n\n"
+
+      + "### 2. **Tracepoint Summary and Subsystem Coverage**\n"
+      + "- Identify and summarize key tracepoints triggered across the following kernel subsystems:\n"
+      + "  - **Memory (kmem/mm):** Allocation, page faults, slab events (`kmalloc`, `mm_page_alloc`, `kmem_cache_alloc`, `page_free_batched`)\n"
+      + "  - **Power Management:** Power domain transitions, frequency scaling, CPU idle/wakeup events, and clock traces (`cpu_idle`, `pm_qos_request`, `cpu_frequency`)\n"
+      + "  - **Interrupts and NMIs:** Capture and interpret `nmi_enter`, `nmi_exit`, spurious interrupts, or excessive NMI activity that might indicate hardware or firmware instability.\n"
+      + "  - **MSR (Model Specific Registers):** Detect anomalous reads/writes, control register changes, or CPU feature mismatches.\n"
+      + "  - **Boot-Time Events:** Identify initcall stages, driver load ordering, module dependencies, kernel parameter parsing, and early allocation failures.\n"
+      + "  - **User Events / Custom Tracepoints:** Detect and summarize user-defined tracepoints and correlate them with kernel activity.\n\n"
+
+      + "### 3. **Event Pattern Analysis**\n"
+      + "- Highlight repetitive or time-correlated trace patterns.\n"
+      + "- Detect excessive syscalls, lock contention, or task preemptions.\n"
+      + "- Identify memory pressure symptoms (OOM indicators, slab cache exhaustion, or zone reclaim failures).\n"
+      + "- Track scheduling delays, wakeup latencies, and preemption patterns between CPUs.\n\n"
+
+      + "### 4. **Error and Anomaly Detection**\n"
+      + "- Identify kernel warnings, BUG traces, or soft lockups.\n"
+      + "- Detect anomalies such as missing modules, failed memory allocations, unbalanced IRQ enable/disable calls, and invalid MSR access.\n"
+      + "- Correlate event timestamps to pinpoint latency spikes or misbehaving kernel threads.\n\n"
+
+      + "### 5. **Cross-Subsystem Correlation**\n"
+      + "- Correlate memory allocation spikes with power events, or NMIs with CPU hotplug operations.\n"
+      + "- Detect cascading issues where one subsystem (e.g., kmem) triggers downstream failures (e.g., in power or I/O scheduling).\n"
+      + "- Highlight causality chains using timestamps and PID associations.\n\n"
+
+      + "### 6. **Performance Metrics & Timing Analysis**\n"
+      + "- Include syscall and tracepoint timing analysis (from `-T`, `-tt`, or `-r` flags if available).\n"
+      + "- Identify high-latency paths, slow interrupt handling, or bottlenecks in allocation or scheduling.\n"
+      + "- Summarize CPU utilization distribution and time spent in various kernel states.\n\n"
+
+      + "### 7. **Root Cause Analysis (RCA)**\n"
+      + "- Provide a clear root cause summary describing the exact sequence that led to the issue.\n"
+      + "- Include kernel function names, process names, and event correlation.\n"
+      + "- If applicable, mention relevant subsystem documentation links (e.g., events-kmem, events-power, tracepoints, user_events).\n\n"
+
+      + "### 8. **Remediation & Optimization Suggestions**\n"
+      + "- Suggest configuration changes, kernel parameters, or sysctl tunables to mitigate the issue.\n"
+      + "- Recommend kernel trace options (`trace_event=*`, `trace_clock=global`, `ftrace.filter`) for targeted re-capture.\n"
+      + "- Suggest memory management tuning (`vm.min_free_kbytes`, `page_alloc.shuffle`, etc.) or power management optimizations.\n"
+      + "- Propose potential code-level improvements for drivers or modules if recurring anomalies are seen.\n\n"
+
+      + "### 9. **Report Formatting**\n"
+      + "Organize the analysis into the following report structure:\n\n"
+      + "- **System Summary**\n"
+      + "- **Major Subsystems Involved**\n"
+      + "- **Top Events and Tracepoints**\n"
+      + "- **Anomalies and Warnings**\n"
+      + "- **Correlated Event Sequences**\n"
+      + "- **Performance Observations**\n"
+      + "- **Root Cause Explanation**\n"
+      + "- **Recommended Fixes & Next Steps**\n\n"
+
+      + "### 10. **Reference Documentation**\n"
+      + "Base your analysis on Linux kernel tracing documentation:\n"
+      + "- [User Events](https://docs.kernel.org/trace/user_events.html)\n"
+      + "- [Tracepoints](https://docs.kernel.org/trace/tracepoints.html)\n"
+      + "- [Trace Events](https://docs.kernel.org/trace/events.html)\n"
+      + "- [Kmem Events](https://docs.kernel.org/trace/events-kmem.html)\n"
+      + "- [Power Events](https://docs.kernel.org/trace/events-power.html)\n"
+      + "- [NMI Events](https://docs.kernel.org/trace/events-nmi.html)\n"
+      + "- [MSR Events](https://docs.kernel.org/trace/events-msr.html)\n"
+      + "- [Boot-time Trace](https://docs.kernel.org/trace/boottime-trace.html)\n\n"
+
+      + "Deliver your response as a clear, structured, and technically rich diagnostic report that could be used directly in a kernel incident RCA document or automated debugging workflow."
+  }
+]
