@@ -1,0 +1,30 @@
+[
+  {
+    "role": "system",
+    "content": "You are an expert Linux debugging engineer specializing in analyzing strace logs for diagnosing and troubleshooting system-level issues."
+  },
+  {
+    "role": "user",
+    "content": "Analyze the following strace log output and extract all critical diagnostic information. Focus on:\n\n"
+      + "1. **Program Debugging:** Identify what the program is attempting to do, its command-line arguments, execution sequence (e.g., `execve`, `brk`, `access`, `openat` calls) as shown in examples. :contentReference[oaicite:3]{index=3}\n"
+      + "2. **Troubleshooting Failures:** Highlight any failed system calls, permission errors (`ENOENT`, `EACCES`), segmentation faults, missing libraries or files. :contentReference[oaicite:4]{index=4}\n"
+      + "3. **Intercepted System Calls:** Summarize all system calls made by the process (e.g., `execve`, `openat`, `read`, `write`, `mmap`, `close`, `fork`, `clone`), including their parameters, return codes and any anomalies. Examples from trace output: `access(\"/etc/ld.so.preload\", R_OK) = -1 ENOENT`. :contentReference[oaicite:5]{index=5}\n"
+      + "4. **Recording & Classification:** Group system calls by purpose — file I/O (open/read/write), network I/O (socket/connect/sendto), process management (fork/execve/wait), memory allocation (brk/mmap). Use examples from tutorial. :contentReference[oaicite:6]{index=6}\n"
+      + "5. **Signal Analysis:** Capture any signals received by the process (e.g., `SIGINT`, `SIGKILL`, `SIGSEGV`), explain when they occurred and their effect on the process execution (e.g., aborted syscalls, termination). :contentReference[oaicite:7]{index=7}\n"
+      + "6. **Tracing Running Processes:** Detect forked or spawned subprocesses, thread creations, associated PIDs, new execve calls in children. Also identify tracing of a running process (e.g., `strace -p <pid>`)."
+      + "7. **Timing & Performance Metrics:** If available (e.g., using `-T`, `-tt`, `-r` flags) summarise syscall latency, frequency of calls, bottlenecks. The LabEx tutorial highlights tracing simple scripts and programs. :contentReference[oaicite:8]{index=8}\n"
+      + "8. **Root Cause Analysis:** Provide a succinct technical summary of what caused observed failure, hang, or abnormal behaviour — e.g., missing library, permission denied, high latency on I/O, heavy memory allocation.\n"
+      + "9. **Remediation Suggestions:** Provide actionable fixes: Linux command-line options (e.g., `strace -e trace=file`, `strace -p pid`, `strace -T`), code-level adjustments (error checking, resource closing), system tuning (permissions, memory limits, etc.).\n\n"
+      + "Use structured output sections like this:\n\n"
+      + "- **Program Name & PID:**\n"
+      + "- **Main Activity Summary:**\n"
+      + "- **Failed System Calls:**\n"
+      + "- **Signals Detected:**\n"
+      + "- **Child Processes:**\n"
+      + "- **Performance Observations:**\n"
+      + "- **Root Cause Summary:**\n"
+      + "- **Recommended Fixes:**\n\n"
+      + "Example references: strace examples from GeeksforGeeks and LabEx (system calls, signals, process tracing, debugging) :contentReference[oaicite:9]{index=9}\n\n"
+      + "Provide a concise but complete technical analysis that can be used for production-level debugging or automation."
+  }
+]
