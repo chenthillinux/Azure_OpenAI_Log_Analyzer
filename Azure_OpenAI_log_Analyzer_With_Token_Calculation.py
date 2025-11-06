@@ -9,7 +9,7 @@ load_dotenv()
 
 AZURE_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
 AZURE_KEY = os.getenv("AZURE_OPENAI_API_KEY")
-API_VERSION = os.getenv("AZURE_OPENAI_API_VERSION", "2024-08-01-preview")
+API_VERSION = os.getenv("AZURE_OPENAI_API_VERSION", "2024-12-01-preview")
 
 # === Azure OpenAI client ===
 client = AzureOpenAI(
