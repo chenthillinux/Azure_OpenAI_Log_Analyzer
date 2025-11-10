@@ -100,8 +100,15 @@ def main():
             model=deployment,
             max_completion_tokens=4096,  # model output limit
             messages=[
-                {"role": "system", "content": "Expert Linux debugging engineer"},
-                {"role": "user", "content": f"Prompt:\n{prompt_content}\n\nExisting Log:\n{log_content}"}
+                {"role": "system",
+                 "content": (
+                "You are an Expert Linux debugging engineer. "
+                "Analyze the given kernel or system logs carefully and provide your answer "
+                "in clear, plain English text and tabulation. "
+                "Do not output JSON, YAML, XML."
+                "Just provide a descriptive analysis and recommendations in paragraph form and tabulation form.")},
+                {"role": "user", "content": prompt_content},
+                {"role": "user", "content": f"analysis :\n\n{log_content}"}
             ]
         )
 
