@@ -101,7 +101,7 @@ def main():
             max_completion_tokens=4096,  # model output limit
             messages=[
                 {"role": "system", "content": "Expert Linux debugging engineer"},
-                {"role": "user", "content": prompt_content}
+                {"role": "user", "content": f"Prompt:\n{prompt_content}\n\nExisting Log:\n{log_content}"}
             ]
         )
 
