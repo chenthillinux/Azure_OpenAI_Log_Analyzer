@@ -106,7 +106,7 @@ def main():
                 "Analyze the given kernel or system logs carefully and provide your answer "
                 "in clear, plain English text and tabulation. "
                 "Do not output JSON, YAML, XML."
-                "Just provide a descriptive analysis and recommendations in paragraph form and tabulation form.")},
+                "Please follow the example output format mentioned on prompt file .")},
                 {"role": "user", "content": prompt_content},
                 {"role": "user", "content": f"analysis :\n\n{log_content}"}
             ]
