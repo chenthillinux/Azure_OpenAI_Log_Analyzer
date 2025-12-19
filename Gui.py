@@ -225,7 +225,11 @@ class AnalyzerGUI(tk.Tk):
             if sys.platform.startswith("darwin"):
                 subprocess.call(("open", path))
             elif os.name == "nt":
+                """
+                this line gets in touch with window subsystem to open notepad++
                 os.startfile(path)
+                """
+                subprocess.Popen(["notepad.exe", path])
             elif os.name == "posix":
                 subprocess.call(("xdg-open", path))
         except Exception as e:
