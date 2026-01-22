@@ -3,6 +3,7 @@ import datetime
 import tiktoken
 from dotenv import load_dotenv
 from openai import AzureOpenAI
+from azure.identity import DefaultAzureCredential
 
 # === Load environment variables ===
 load_dotenv()
@@ -10,12 +11,20 @@ load_dotenv()
 AZURE_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
 AZURE_KEY = os.getenv("AZURE_OPENAI_API_KEY")
 API_VERSION = os.getenv("AZURE_OPENAI_API_VERSION", "2024-12-01-preview")
+credential = DefaultAzureCredential()
+
+def get_azure_ad_token():
+    return credential.get_token(
+        "https://cognitiveservices.azure.com/.default"
+    ).token
+
 
 # === Azure OpenAI client ===
 client = AzureOpenAI(
     azure_endpoint=AZURE_ENDPOINT,
-    api_key=AZURE_KEY,
-    api_version=API_VERSION
+    #api_key=AZURE_KEY,
+    api_version=API_VERSION,
+    azure_ad_token_provider=get_azure_ad_token
 )
 
 deployment = "gpt-4.1"  # Model deployment name
